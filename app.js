@@ -4,7 +4,7 @@ const produits = [
   { nom: "Écran", quantite: 3 }
 ];
 
-const liste = document.querySelector("#liste-produit");
+const liste = document.querySelector("#liste-produits");
 const formulaire = document.querySelector("#formulaire");
 const champNom = document.querySelector("#nom");
 const champQuantite = document.querySelector("#quantite");
@@ -18,6 +18,8 @@ function afficherProduits() {
   const resultats = produits.filter(function (produit) {
     return produit.nom.toLowerCase().includes(recherche);
   });
+  console.log(resultats);
+  
 
   resultats.forEach(function (produit) {
     const element = document.createElement("li");
@@ -41,9 +43,11 @@ function afficherProduits() {
 formulaire.addEventListener("submit", function (event) {
   event.preventDefault();
   const nom = champNom.value.trim();
-  const quantite = champQuantite.value;
+  
+  const quantite = Number(champQuantite.value);
+  
 
-  if (nom === "" && champQuantite.value === "") {
+  if (nom === "" || champQuantite.value <= 0) {
     message.textContent = "Renseignez le nom et la quantité.";
     return;
   }
@@ -57,7 +61,11 @@ formulaire.addEventListener("submit", function (event) {
   message.textContent = "Matériel ajouté.";
   formulaire.reset();
   champRecherche.value = "";
+  console.log(produits);
+  afficherProduits()
+
+  
 });
 
-champRecherche.addEventListener("change", afficherProduits);
+champRecherche.addEventListener("input", afficherProduits);
 afficherProduits();
