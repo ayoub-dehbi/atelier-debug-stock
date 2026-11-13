@@ -47,12 +47,12 @@ formulaire.addEventListener("submit", function (event) {
   const quantite = Number(champQuantite.value);
   
 
-  if (nom === "" || champQuantite.value <= 0) {
+  if (nom === "" || champQuantite === "") {
     message.textContent = "Renseignez le nom et la quantité.";
     return;
   }
 
-  if (!Number.isInteger(Number(quantite)) || Number(quantite) <= 0) {
+  if (!Number.isInteger(quantite) || quantite <= 0) {
     message.textContent = "La quantité doit être un entier supérieur à zéro.";
     return;
   }
